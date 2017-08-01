@@ -189,10 +189,13 @@ class AttackParameters():
             WRITE_STDOUT(' Done!\n')
 
             # analyse TGS-REP and extract rc4-ciphered ticket
-            tgs_rep = parse_TGS_REP(sock, subkey, spn, samaccountname, self.DC_addr)[0]
-            # Ticket is not rc4-ciphered
-            if not tgs_rep:
-                continue
+            try:
+            	tgs_rep = parse_TGS_REP(sock, subkey, spn, samaccountname, self.DC_addr)[0]
+            	# Ticket is not rc4-ciphered
+            	if not tgs_rep:
+                	continue
+            except:
+            	pass
 
             c=""
 
